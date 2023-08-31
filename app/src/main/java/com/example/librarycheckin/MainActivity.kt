@@ -273,14 +273,15 @@ fun HomeScreen(){
                 MutableInteractionSource()
             }
 
+
             val isPressed by interactionSource.collectIsPressedAsState()
 
-            Button(
-                onClick = { /*TODO*/ },
-                interactionSource = interactionSource
-            ) {
-                Text(if (isPressed) "Pressed" else "Not pressed" )
-            }
+//            Button(
+//                onClick = { /*TODO*/ },
+//                interactionSource = interactionSource
+//            ) {
+//                Text(if (isPressed) "Pressed" else "Not pressed" )
+//            }
 
             FourSizeGrid(modifier = Modifier.size(size))
         }
