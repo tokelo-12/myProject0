@@ -21,6 +21,13 @@ object UserData{
             "drtg-345",
             "HP",
             979557563673753
+        ),
+        User(
+            "Carrick",
+            "Mahn",
+            "dr65-345",
+            "Lenovo",
+            9796775563673753
         )
     )
     fun findUserById(identityNumber: Long?): User{

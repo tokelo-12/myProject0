@@ -1,6 +1,5 @@
 package com.example.librarycheckin.checkinspage
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,13 +13,15 @@ import com.example.librarycheckin.data.UserData
 import com.example.librarycheckin.ui.theme.LibraryCheckInTheme
 
 @Composable
-fun <T> userCollection(
+fun <T> UserCollection(
     items: List<T>,
     rows:@Composable (T) -> Unit
 ){
     LazyColumn{
         item {
-            Card {
+            Card(
+
+            ) {
                 Column(modifier = Modifier.padding(10.dp)) {
                     items.forEach { item ->
                         rows(item)
@@ -32,9 +33,9 @@ fun <T> userCollection(
 
 }
 @Composable
-fun checkInScreen(
+fun CheckInScreen(
 ){
-    userCollection(
+    UserCollection(
         items = UserData.usersList,
         rows = { user ->
             BaseRow(
@@ -45,19 +46,14 @@ fun checkInScreen(
             )
         }
     )
-    //implement lazyRow
 }
 
-@Composable
-fun userCheckIns(){
 
-
-}
 
 @Preview
 @Composable
-fun checkInsScreenPreview(){
+fun CheckInsScreenPreview(){
     LibraryCheckInTheme {
-        checkInScreen()
+        CheckInScreen()
     }
 }

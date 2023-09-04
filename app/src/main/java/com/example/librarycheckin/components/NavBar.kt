@@ -11,19 +11,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.librarycheckin.CheckIns
+import com.example.librarycheckin.Destinations
 import com.example.librarycheckin.Home
-import com.example.librarycheckin.ui.theme.LibraryCheckInTheme
 
 @Composable
 fun NavBar(
-    navController: NavController//(Destinations) -> Unit,){}
+    go: (Destinations) -> Unit
 ){
+
+
     androidx.compose.material.BottomAppBar(
         modifier = Modifier
             .clip(RoundedCornerShape(15.dp)),
@@ -33,12 +32,7 @@ fun NavBar(
     ) {
         NavigationBarItem(
             selected = false,
-            onClick = {
-                navController.navigate(Home.route)
-//                {
-//                launchSingleTop = true
-//                }
-                      },
+            onClick = { go(Home) },
             icon = {
                 Icon(Icons.Default.Home, contentDescription = null)
             }
@@ -55,12 +49,7 @@ fun NavBar(
 
         NavigationBarItem(
             selected = false,
-            onClick = {
-                navController.navigate(CheckIns.route)
-//                {
-//                    launchSingleTop = true
-//                }
-            },
+            onClick = { go(CheckIns) },
             icon = {
                 Icon(Icons.Default.LibraryAddCheck, contentDescription = null)
             }
@@ -68,10 +57,10 @@ fun NavBar(
     }
 }
 
-@Preview
-@Composable
-fun NavBarPreview(){
-    LibraryCheckInTheme {
-        NavBar(navController = rememberNavController())
-    }
-}
+//@Preview
+//@Composable
+//fun NavBarPreview(){
+//    LibraryCheckInTheme {
+//        NavBar(navController = rememberNavController())
+//    }
+//}
