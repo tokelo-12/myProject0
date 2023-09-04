@@ -1,43 +1,25 @@
 package com.example.librarycheckin
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.FabPosition
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.History
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.LibraryAddCheck
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -47,12 +29,15 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.librarycheckin.components.FAB
+import com.example.librarycheckin.components.NavBar
 import com.example.librarycheckin.ui.theme.LibraryCheckInTheme
 
 class MainActivity : ComponentActivity() {
@@ -65,11 +50,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeScreen()
+                    LibraryApp()
                 }
             }
         }
     }
+
+
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -141,181 +129,66 @@ fun Search() {
     }
 }
 
-@Composable
-fun FourSizeGrid(modifier: Modifier) {
-
-    LazyVerticalGrid(
-        GridCells.Fixed(2),
-//        modifier = Modifier
-//            .heightIn(200.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
-
-    ) {
-        item {
-            Card(
-                modifier = modifier
-//                    .fillMaxWidth()
-//                    .size(200.dp)
-//                    .padding(8.dp),
-//                contentAlignment = Alignment.Center
-            ) {
-//                Text(text = numbers.toString())
-            }
-        }
-
-        item {
-            Card(
-                modifier = modifier
-//                    .fillMaxWidth()
-//                    .size(200.dp)
-//                    .padding(8.dp),
-            ){
-//                Text(text = numbers.toString())
-            }
-        }
 
 
-        item {
-            Card(
-                modifier = modifier
-//                    .fillMaxWidth()
-//                    .size(200.dp)
-//                    .padding(8.dp),
-            ){
-//                Text(text = numbers.toString())
-            }
-        }
 
-        item {
-            Card(
-                modifier = modifier
-//                    .fillMaxWidth()
-//                    .size(200.dp)
-//                    .padding(8.dp),
-            ){
-//                Text(text = numbers.toString())
-            }
-        }
-    }
-}
 
-//grid box size variable
-val size = 200.dp
+
 
 
 @Composable
-fun NavBar(){
-    androidx.compose.material.BottomAppBar(
-        modifier = Modifier
-//            .padding(horizontal = 5.dp)
-            .clip(RoundedCornerShape(15.dp)),
-        cutoutShape = CircleShape,
-        backgroundColor = Color.LightGray,
-        contentColor = Color.Black,
-        ) {
-        NavigationBarItem(
-            selected = false,
-            onClick = { /*TODO*/ },
-            icon = {
-                Icon(Icons.Default.Home, contentDescription = null)
-            }
-        )
-
-        NavigationBarItem(
-//            modifier = Modifier.padding(start = 16.dp),
-            selected = false,
-            onClick = { /*TODO*/ },
-            icon = {
-//                Icon(Icons.Default.Home, contentDescription = null)
-            }
-        )
-
-        NavigationBarItem(
-            selected = false,
-            onClick = { /*TODO*/ },
-            icon = {
-                Icon(Icons.Default.LibraryAddCheck, contentDescription = null)
-            }
-        )
-    }
-}
-
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Composable
-fun HomeScreen(){
+fun LibraryApp(){
+    val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
 
     Scaffold(
         backgroundColor = Color.Black,
         modifier = Modifier.fillMaxSize(),
         topBar = { Search() },
-        bottomBar = { NavBar() },
+        bottomBar = {
+            NavBar(
+                navController = navController
+            )
+        },
+        
         floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/ },backgroundColor = Color.LightGray, contentColor = Color.Black) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = null
-                )
-            }
+            FAB()
         },
         scaffoldState = scaffoldState,
         isFloatingActionButtonDocked = true,
         floatingActionButtonPosition = FabPosition.Center
-    ){
-        Column(
-            Modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            
-            val interactionSource = remember {
-                MutableInteractionSource()
+    ){  innerPadding ->
+
+        NavHost(
+            navController = navController ,
+            startDestination = Home.route,
+            modifier = Modifier.padding(innerPadding)
+        ){
+            //builder parameter
+            composable(route = Home.route){
+                Home.screen()
             }
 
-
-            val isPressed by interactionSource.collectIsPressedAsState()
-
-//            Button(
-//                onClick = { /*TODO*/ },
-//                interactionSource = interactionSource
-//            ) {
-//                Text(if (isPressed) "Pressed" else "Not pressed" )
-//            }
-
-            FourSizeGrid(modifier = Modifier.size(size))
+            composable(route = CheckIns.route){
+                CheckIns.screen()
+            }
         }
+
+
     }
 }
+
+
+
+//    fun NavHostController.navigateSingleTopTo(route: String) =
+//        this.navigate(route) { launchSingleTop = true }
+
 
 @Preview
 @Composable
 fun BottomAppPreview(){
     LibraryCheckInTheme {
-        HomeScreen()
-    }
-}
-@Preview
-@Composable
-fun NavBarPreview(){
-    LibraryCheckInTheme {
-        NavBar()
+        LibraryApp()
     }
 }
 
-
-@Preview(showBackground = true)
-@Composable
-fun DetailsSectionPreview(){
-    LibraryCheckInTheme {
-        FourSizeGrid(modifier = Modifier.size(size))
-    }
-}
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    LibraryCheckInTheme {
-//        Search()
-//    }
-//}
