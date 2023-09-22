@@ -24,7 +24,7 @@ object UserData{
         ),
         User(
             "Carrick",
-            "Mahn",
+            "Man",
             "dr65-345",
             "Lenovo",
             9796775563673753

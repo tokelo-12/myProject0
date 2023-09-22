@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.librarycheckin.CheckIns
 import com.example.librarycheckin.Destinations
 import com.example.librarycheckin.Home
@@ -27,9 +26,9 @@ fun NavBar(
         modifier = Modifier
             .clip(RoundedCornerShape(15.dp)),
         cutoutShape = CircleShape,
-        backgroundColor = Color.LightGray,
         contentColor = Color.Black,
-    ) {
+        backgroundColor = Color.White,
+        ) {
         NavigationBarItem(
             selected = false,
             onClick = { go(Home) },

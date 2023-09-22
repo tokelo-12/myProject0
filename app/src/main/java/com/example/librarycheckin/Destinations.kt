@@ -12,3 +12,7 @@ object CheckIns: Destinations{
     override val route = "checkIns"
 }
 
+object RegForm: Destinations{
+    override val route = "regForm"
+}
+

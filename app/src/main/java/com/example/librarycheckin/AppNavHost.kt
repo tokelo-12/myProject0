@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.librarycheckin.checkinspage.CheckInScreen
 import com.example.librarycheckin.home.HomeScreen
+import com.example.librarycheckin.registrationform.RegScreen
 
 @Composable
 fun AppNavHost(
@@ -25,6 +26,10 @@ fun AppNavHost(
 
         composable(route = CheckIns.route){
             CheckInScreen()
+        }
+
+        composable(route = RegForm.route){
+            RegScreen()
         }
     }
 

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,16 +31,13 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+//                    color = MaterialTheme.colorScheme.background
                 ) {
                     LibraryApp()
                 }
             }
         }
     }
-
-
-
 }
 
 
@@ -79,26 +75,32 @@ fun LibraryApp(){
         },
 
         floatingActionButton = {
-            FAB()
+            FAB(
+                go = { newScreen ->
+                    navController.navigateSingleTopTo(
+                        newScreen.route
+                    )
+                }
+            )
         },
         scaffoldState = scaffoldState,
         isFloatingActionButtonDocked = true,
         floatingActionButtonPosition = FabPosition.Center
     ){ innerPadding ->
 
-        AppNavHost(
-            navController = navController,
-            modifier = Modifier.padding(innerPadding)
-        )
-
+        Surface(modifier = Modifier.fillMaxSize()) {
+            AppNavHost(
+                navController = navController,
+                modifier = Modifier.padding(innerPadding)
+            )
+        }
 
     }
 }
 
 
 
-    fun NavHostController.navigateSingleTopTo(route: String) =
-        this.navigate(route) {
+    fun NavHostController.navigateSingleTopTo(route: String) = this.navigate(route) {
 //            pop up to the start destination of the graph to avoid building up a large stack of destinations on the back stack as you select tabs
             popUpTo(
                 this@navigateSingleTopTo.graph.findStartDestination().id
