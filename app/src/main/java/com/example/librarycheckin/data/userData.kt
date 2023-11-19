@@ -1,11 +1,15 @@
 package com.example.librarycheckin.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.time.LocalDateTime
 
 //Hard-coded data
-class User(
+@Entity(tableName = "users")
+data class User(
     val firstName: String,
     val lastName: String,
+    @PrimaryKey(autoGenerate = false)
     val deviceId: String,
     val laptopMake: String,
     val identityNumber: Long,
