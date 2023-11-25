@@ -24,6 +24,6 @@ interface UserDAO {
     fun getUser(deviceId: String): Flow<User>
 
     @Query("SELECT * FROM users order by firstName")
-    fun getAllItems():Flow<List<User>>
+    fun getAllUsers():Flow<List<User>>
 
 }

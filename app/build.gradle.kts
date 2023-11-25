@@ -83,3 +83,13 @@ dependencies {
     ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
     implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
 }
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+    // Or shorter:
+    jvmToolchain(17)
+    // For example:
+    jvmToolchain(17)
+}
