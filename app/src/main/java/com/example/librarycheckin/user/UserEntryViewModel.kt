@@ -23,6 +23,12 @@ class UserEntryViewModel(private var usersRepository: UsersRepository) : ViewMod
             firstName.isNotBlank() && lastName.isNotBlank() && deviceId.isNotEmpty() && laptopMake.isNotBlank() && identityNumber.isNotBlank()
         }
     }
+
+    suspend fun saveItem(){
+        if(validateInput()){
+            usersRepository.insertUser(userUiState.userDetails.toUser())
+        }
+    }
 }
 
 /* Represents Ui State for a User.
